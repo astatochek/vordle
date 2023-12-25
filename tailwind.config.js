@@ -11,6 +11,9 @@ export default {
         'onyx': '#3a3a3c',
         'brass': '#b59f3b',
         'middle-green': '#538d4e',
+        'davys-grey': '#565758',
+        'old-silver': '#818384',
+        'cultured': '#f8f8f8'
       }
     },
   },
