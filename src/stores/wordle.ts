@@ -82,10 +82,13 @@ export const useWordleStore = defineStore('wordle', () => {
     })
 
     word.forEach(({ char }, index) => {
-      const isNotMarked = board.value[line][index].status === 'empty'
-      if (isNotMarked) {
-        keyboard.value[Chars.indexOf(char)].status = 'excluded'
+      const isNotMarkedInLine = board.value[line][index].status === 'empty'
+      const isNotMarkedInKeyboard = keyboard.value[Chars.indexOf(char)].status === 'excluded'
+      if (isNotMarkedInLine) {
         board.value[line][index].status = 'excluded'
+        if (isNotMarkedInKeyboard) {
+          keyboard.value[Chars.indexOf(char)].status = 'excluded'
+        }
       }
     })
   }

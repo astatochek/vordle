@@ -19,19 +19,21 @@ fromEvent(document, 'keydown').subscribe((event) => {
 </script>
 
 <template>
-  <main class="flex flex-col justify-end h-dvh bg-chinese-black text-cultured items-center pt-12">
-    <h1 class="text-2xl font-bold">Vordle</h1>
-    <hr class="h-px mt-2 w-full bg-cultured/50 border-0" />
-    <section class="flex mt-2 justify-center items-center">
-      <div class="grid grid-cols-5 gap-1">
-        <SquareCard
-          v-for="(square, index) in boardAsList"
-          :key="index"
-          :char="square.char"
-          :status="square.status"
-        />
-      </div>
-    </section>
-    <KeyboardSection />
+  <main class="flex h-dvh w-full bg-chinese-black text-cultured items-center justify-center">
+    <div class="flex flex-col justify-start items-center w-full">
+      <h1 class="text-2xl font-bold">Vordle</h1>
+      <hr class="h-px mt-2 w-full bg-cultured/50 border-0" />
+      <section class="flex mt-2 justify-center items-center">
+        <div class="grid grid-cols-5 gap-1">
+          <SquareCard
+            v-for="(square, index) in boardAsList"
+            :key="index"
+            :char="square.char"
+            :status="square.status"
+          />
+        </div>
+      </section>
+      <KeyboardSection />
+    </div>
   </main>
 </template>
