@@ -1,6 +1,6 @@
-import type { Nil, Tile, Char, CharCounts, Key } from "@/utils/model";
+import type { Nil, Tile, Char, CharCounts, Key } from '@/utils/model'
 import { Chars } from '@/utils/model'
-import { MAX_NUM_ROWS, WORD_LENGTH } from '@/utils/constants'
+import { MAX_NUM_ROWS, VALID_WORDS, WORD_LENGTH } from '@/utils/constants'
 
 export function isNil(v: unknown): v is Nil {
   return v == null
@@ -45,4 +45,12 @@ export function getBaseCharCount(): CharCounts {
     counts[char] = 0
     return counts
   }, {} as CharCounts)
+}
+
+export function isIncludedWord(word: string): boolean {
+  return VALID_WORDS.includes(word)
+}
+
+export function isCurrentLine(curRow: number, index: number) {
+  return Math.floor(index / WORD_LENGTH) === curRow
 }

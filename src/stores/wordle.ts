@@ -1,19 +1,21 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { MAX_NUM_ROWS, WORD_LENGTH, WORDS } from '@/utils/constants'
+import { MAX_NUM_ROWS, WORD_LENGTH, HIDDEN_WORDS } from '@/utils/constants'
 import type { Char, Key, Tile } from '@/utils/model'
 import type { Ref } from 'vue'
 import {
   createDefaultBoard,
   createDefaultKeyboard,
   getCharCounts,
+  isIncludedWord,
   isNil,
   isRowEmpty
 } from '@/utils/functions'
 import { Chars } from '@/utils/model'
+import { timer } from 'rxjs'
 
 export const useWordleStore = defineStore('wordle', () => {
-  const hiddenWord = WORDS[Math.floor(Math.random() * WORDS.length)]
+  const hiddenWord = HIDDEN_WORDS[Math.floor(Math.random() * HIDDEN_WORDS.length)]
   const hiddenWordCharCounts = getCharCounts(hiddenWord)
 
   const curRow = ref(0)
@@ -21,6 +23,8 @@ export const useWordleStore = defineStore('wordle', () => {
 
   const board: Ref<Tile[][]> = ref(createDefaultBoard())
   const keyboard: Ref<Key[]> = ref(createDefaultKeyboard())
+
+  const shake = ref(false)
 
   const isGameFinished = ref(false)
 
@@ -32,6 +36,12 @@ export const useWordleStore = defineStore('wordle', () => {
 
   function enterWord() {
     if (isGameFinished.value || isRowEmpty(board.value[curRow.value])) return
+
+    const word = board.value[curRow.value].map(({ char }) => char).join('')
+    if (!isIncludedWord(word)) {
+      shakeFor(500)
+      return
+    }
 
     validateLine(curRow.value)
 
@@ -104,11 +114,18 @@ export const useWordleStore = defineStore('wordle', () => {
     return curCol === 0
   }
 
+  function shakeFor(duration: number): void {
+    shake.value = true
+    timer(duration).subscribe(() => (shake.value = false))
+  }
+
   return {
     boardAsList,
     keyboardFirstLine,
     keyboardSecondLine,
     keyboardThirdLine,
+    curRow,
+    shake,
     enterWord,
     enterChar,
     deleteChar
