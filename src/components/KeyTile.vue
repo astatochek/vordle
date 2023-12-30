@@ -6,7 +6,7 @@ defineProps<Key>()
 
 <template>
   <button
-    class="rounded-sm w-8 h-11 text-base text-center pt-0.5 uppercase font-bold"
+    class="rounded-sm h-11 text-base text-center pt-0.5 uppercase font-bold"
     :class="{
       'bg-old-silver': status === 'empty',
       'bg-onyx': status === 'excluded',

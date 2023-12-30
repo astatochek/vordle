@@ -19,8 +19,8 @@ fromEvent(document, 'keydown').subscribe((event) => {
 </script>
 
 <template>
-  <main class="flex h-dvh min-h-fit w-full text-cultured items-center justify-center">
-    <div class="flex flex-col justify-start items-center w-full">
+  <main class="flex h-dvh min-h-fit w-full text-cultured items-around justify-center kb:items-center kb:justify-center">
+    <div class="flex flex-col justify-end kb:justify-start items-center w-full">
       <h1 class="text-2xl font-bold">Vordle</h1>
       <hr class="h-px mt-2 w-full bg-cultured/50 border-0" />
       <section class="flex mt-2 justify-center items-center">

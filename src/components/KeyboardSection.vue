@@ -10,28 +10,28 @@ const { enterChar, enterWord, deleteChar } = store
 </script>
 
 <template>
-  <section class="flex flex-col mt-2 justify-start items-center gap-1.5">
-    <div class="flex flex-row gap-1">
+  <section class="flex flex-col mt-2 justify-start items-center gap-1.5 w-full kb:w-[460px]">
+    <div class="grid grid-cols-20 gap-1 w-full">
       <KeyTile
         v-for="key in keyboardFirstLine"
         :key="key.char"
         :char="key.char"
         :status="key.status"
         @key-click="() => enterChar(key.char)"
+        class="col-span-2"
       />
-    </div>
-    <div class="flex flex-row gap-1">
+      <div class="col-span-1" />
       <KeyTile
         v-for="key in keyboardSecondLine"
         :key="key.char"
         :char="key.char"
         :status="key.status"
         @key-click="() => enterChar(key.char)"
+        class="col-span-2"
       />
-    </div>
-    <div class="flex flex-row gap-1">
+      <div class="col-span-1" />
       <button
-        class="rounded-sm bg-old-silver w-[3.25rem] h-11 text-xs text-center font-bold"
+        class="rounded-sm bg-old-silver col-span-3 h-11 text-xs text-center font-bold"
         @click="enterWord"
       >
         Enter
@@ -42,9 +42,10 @@ const { enterChar, enterWord, deleteChar } = store
         :char="key.char"
         :status="key.status"
         @key-click="() => enterChar(key.char)"
+        class="col-span-2"
       />
       <button
-        class="rounded-sm bg-old-silver w-[3.25rem] h-11 flex justify-center items-center pr-1"
+        class="rounded-sm bg-old-silver col-span-3 h-11 flex justify-center items-center pr-1"
         @click="deleteChar"
       >
         <BackspaceIcon />
@@ -52,3 +53,9 @@ const { enterChar, enterWord, deleteChar } = store
     </div>
   </section>
 </template>
+
+<style>
+.grid-cols-20 {
+  grid-template-columns: repeat(20, minmax(0, 1fr));
+}
+</style>

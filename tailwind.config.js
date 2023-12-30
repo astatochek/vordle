@@ -14,6 +14,9 @@ export default {
         'davys-grey': '#565758',
         'old-silver': '#818384',
         'cultured': '#f8f8f8'
+      },
+      screens: {
+        'kb': '460px'
       }
     },
   },
